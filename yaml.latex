@@ -145,7 +145,7 @@ $if(subtitle)$
 $endif$
 \author{
   $for(author)$
-    $author.names$ \and
+    $author.name$ \and
   $endfor$
 }
 \date{$date$}

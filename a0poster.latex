@@ -186,7 +186,7 @@ $if(title)$
 $endif$
 
 % authors, all in one single line
-\huge\textbf{$for(author)$$author.names$ ($author.affiliation$); $endfor$}
+\huge\textbf{$for(author)$$author.name$ ($author.affiliation$); $endfor$}
 
 \end{minipage}
 
