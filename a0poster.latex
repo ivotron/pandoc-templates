@@ -1,7 +1,7 @@
 % original: http://andreas.welcomes-you.com/projects/a0poster/
 % taken from: http://www.latextemplates.com/template/a0poster-landscape-poster
-% adapted to Pandoc: Ivo Jimenez
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{a0poster}
+% adapted to Pandoc by Ivo Jimenez
+\documentclass[$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{a0poster}
 \usepackage[T1]{fontenc}
 
 % This is so we can have multiple columns of text side-by-side
@@ -156,22 +156,45 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
-$if(title)$
-\title{$title$}
-$endif$
-$if(subtitle)$
-\subtitle{$subtitle$}
-$endif$
-\author{
-  $for(author)$
-    $author.names$ \and
-  $endfor$
-}
-\date{$date$}
+% modify size of verbatim text
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,frame=leftline}
+
+% modify footer line
+\renewcommand\footnoterule{\vskip15pt \rule{200pt}{1pt} \vskip15pt\relax}
 
 \begin{document}
+
+% the title
+\begin{minipage}[b]{0.85\linewidth}
+
 $if(title)$
-\maketitle
+
+  \VERYHuge
+  $if(titlecolor)$
+    \color{$titlecolor$}
+  $endif$
+
+  \textbf{$title$}
+
+  $if(subtitle)$
+    $if(subtitlecolor)$
+      \color{$subtitlecolor$}
+    $endif$
+    \Huge \textit{$subtitle$}\\[1cm]
+  $endif$
+
+$endif$
+
+% authors, all in one single line
+\huge\textbf{$for(author)$$author.names$ ($author.affiliation$); $endfor$}
+
+\end{minipage}
+
+\vspace{3cm} % A bit of extra whitespace between the header and poster content
+
+$if(titleseparator)$
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{1pt}}
+\vspace{2cm}
 $endif$
 
 % This is how many columns your poster will be broken into, a poster with many 
