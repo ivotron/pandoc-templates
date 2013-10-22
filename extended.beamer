@@ -151,7 +151,11 @@ $endif$
 
 \begin{document}
 $if(title)$
+$if(nonumberontitle)$
+\frame[plain]{\titlepage\addtocounter{framenumber}{-1}}
+$else$
 \frame{\titlepage}
+$endif$
 $endif$
 
 $for(include-before)$
