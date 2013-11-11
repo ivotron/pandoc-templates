@@ -78,9 +78,14 @@ $highlighting-macros$
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
+% modify size of verbatim text
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,frame=leftline}
 $endif$
 $if(tables)$
 \usepackage{longtable}
+\usepackage{booktabs}
+\renewcommand{\longtable}{\tabular}
+\renewcommand{\endlongtable}{\endtabular}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -155,9 +160,6 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
-
-% modify size of verbatim text
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,frame=leftline}
 
 % modify footer line
 \renewcommand\footnoterule{\vskip15pt \rule{200pt}{1pt} \vskip15pt\relax}
