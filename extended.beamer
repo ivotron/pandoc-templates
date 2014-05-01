@@ -65,6 +65,8 @@ $highlighting-macros$
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
+% modify size of verbatim text
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}$if(monofontsize)$,fontsize=\$monofontsize$$endif$}
 $endif$
 $if(tables)$
 \usepackage{longtable}
@@ -134,9 +136,6 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
-
-% modify size of verbatim text
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}$if(monofontsize)$,fontsize=\$monofontsize$$endif$}
 
 $if(title)$
 \title{$title$}
