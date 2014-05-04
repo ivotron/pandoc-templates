@@ -100,13 +100,9 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
-$if(use-default-spacing)$
-% nothing, just use whatever has been defined somewhere else
-$else$
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
-$endif$
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
@@ -130,7 +126,28 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
+$if(acm-sig-alternate)$
+\numberofauthors{$author.length$}
+$endif$
+\author{
+  $for(author)$
+     $if(author.name)$
+       $if(acm-sig-alternate)$
+         \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(author.email)$ \email{$author.email$} $endif$
+       $else$
+         $if(ieeetran)$
+           \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(author.email)$ \\ $author.email$ $endif$ }
+         $else$
+           $author.name$
+         $endif$
+       $endif$
+     $else$
+       $author$
+     $endif$
+     $sep$ \and
+  $endfor$
+}
+
 \date{$date$}
 $for(header-includes)$
 $header-includes$
@@ -140,12 +157,6 @@ $endfor$
 $if(title)$
 \maketitle
 $endif$
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
-$endif$
-
 $if(abstract)$
 \begin{abstract}
 $abstract$
