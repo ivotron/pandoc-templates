@@ -143,7 +143,19 @@ $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
-\author{$for(author)$ $author.name$ ($author.affiliation$) \\ ~\\ $endfor$}
+\author{
+  $for(author)$
+     $if(author.name)$
+       $author.name$
+       $if(author.affiliation)$
+         ($author.affiliation$)
+       $endif$
+     $else$
+       $author$
+     $endif$
+     $sep$ \and
+  $endfor$
+}
 $if(date)$
 \date{$date$}
 $endif$
