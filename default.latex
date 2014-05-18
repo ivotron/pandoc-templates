@@ -127,7 +127,7 @@ $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
 $if(acm-sig-alternate)$
-\numberofauthors{$author.length$}
+\numberofauthors{3}
 $endif$
 \author{
   $for(author)$
@@ -152,6 +152,12 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+$if(disable-copyright)$
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+$endif$
 
 \begin{document}
 $if(title)$
