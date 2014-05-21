@@ -129,23 +129,28 @@ $endif$
 $if(acm-sig-alternate)$
 \numberofauthors{3}
 $endif$
+
+$if(letter)$
+\signature{
+$else$
 \author{
-  $for(author)$
-     $if(author.name)$
-       $if(acm-sig-alternate)$
-         \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(author.email)$ \email{$author.email$} $endif$
-       $else$
-         $if(ieeetran)$
-           \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(author.email)$ \\ $author.email$ $endif$ }
-         $else$
-           $author.name$
-         $endif$
-       $endif$
-     $else$
-       $author$
-     $endif$
-     $sep$ \and
-  $endfor$
+$endif$
+$for(author)$
+  $if(author.name)$
+    $if(acm-sig-alternate)$
+      \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(author.email)$ \email{$author.email$} $endif$
+    $else$
+      $if(ieeetran)$
+        \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(author.email)$ \\ $author.email$ $endif$ }
+      $else$
+        $author.name$
+      $endif$
+    $endif$
+  $else$
+    $author$
+  $endif$
+  $sep$ \and
+$endfor$
 }
 
 \date{$date$}
@@ -157,6 +162,10 @@ $if(disable-copyright)$
 \makeatletter
 \def\@copyrightspace{\relax}
 \makeatother
+$endif$
+
+$if(letter)$
+\address{$for(return-address)$$return-address$ \\$endfor$}
 $endif$
 
 \begin{document}
@@ -180,7 +189,25 @@ $if(toc)$
 \tableofcontents
 }
 $endif$
+
+$if(letter)$
+  \begin{letter}{$for(address)$$address$ \\$endfor$}
+
+  $if(opening)$
+  \opening{$opening$}
+  $endif$
+$endif$
+
 $body$
+
+$if(letter)$
+  $if(closing)$
+    % Move signature and close to the left
+    \longindentation=0pt
+    \closing{$closing$}
+  $endif$
+  \end{letter}
+$endif$
 
 $if(natbib)$
 $if(biblio-files)$
