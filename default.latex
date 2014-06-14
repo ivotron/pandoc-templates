@@ -62,6 +62,8 @@ $if(verbatim-in-note)$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
+\renewcommand{\longtable}{\tabular}
+\renewcommand{\endlongtable}{\endtabular}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -100,9 +102,13 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
+$if(usedefaultspacing)$
+% no spacing just use whatever has been defined somewhere else
+$else$
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
+$endif$
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
@@ -120,16 +126,64 @@ $if(lang)$
 \fi
 $endif$
 
+% a0poster {
+$if(a0poster)$
+
+  % multicol stuff
+  \usepackage{multicol} % so we can have multiple columns of text side-by-side
+  $if(columnsep)$
+    \columnsep=$columnsep$ % the amount of white space between columns
+  $endif$
+  $if(columnseprule)$ % the thickness of the black line between columns
+    \columnseprule=$columnseprule$
+  $endif$
+
+  % title format
+  \makeatletter
+  \renewcommand\@maketitle{%
+  \begin{center}
+  \null
+  {
+  \VERYHuge
+  $if(titlecolor)$
+  \color{$titlecolor$}
+  $endif$
+  \textbf{\@title} \par}%
+  \vskip 0.6em%
+  {
+  \Huge
+  \lineskip .5em%
+  \begin{tabular}[t]{l}%
+  \@author
+  \end{tabular}\par}%
+  \vskip 1cm
+  \par
+  \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+  \end{center}
+  }
+  \makeatother
+
+  \pagenumbering{gobble} % remove page numbers
+
+  \usepackage{titlesec}
+  \titleformat*{\section}{\veryHuge\bfseries}
+$endif$
+% }
+
+% title {
 $if(title)$
 \title{$title$}
 $endif$
 $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
+% }
+
 $if(acm-sig-alternate)$
 \numberofauthors{3}
 $endif$
 
+% authors {
 $if(letter)$
 \signature{
 $else$
@@ -143,7 +197,7 @@ $for(author)$
       $if(ieeetran)$
         \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(author.email)$ \\ $author.email$ $endif$ }
       $else$
-        $author.name$
+        $author.name$ $if(author.affiliation)$ ($author.affiliation$) $endif$
       $endif$
     $endif$
   $else$
@@ -152,6 +206,7 @@ $for(author)$
   $sep$ \and
 $endfor$
 }
+% }
 
 \date{$date$}
 $for(header-includes)$
@@ -164,19 +219,44 @@ $if(disable-copyright)$
 \makeatother
 $endif$
 
+% letter {
 $if(letter)$
-\address{$for(return-address)$$return-address$ \\$endfor$}
+  \address{$for(return-address)$$return-address$ \\$endfor$}
 $endif$
+% }
 
 \begin{document}
+
+% a0poster {
+$if(a0poster)$
+  \begin{minipage}{\textwidth}
+$endif$
+% }
+
 $if(title)$
 \maketitle
 $endif$
+
+% a0poster {
+$if(a0poster)$
+  \end{minipage}
+  \vspace{1cm}
+  \LARGE
+$endif$
+% }
+
 $if(abstract)$
 \begin{abstract}
 $abstract$
 \end{abstract}
 $endif$
+
+% a0poster {
+$if(a0poster)$
+  \begin{multicols}{$if(columns)$ $columns$ $else$ 4 $endif$}
+  \raggedcolumns
+$endif$
+% }
 
 $for(include-before)$
 $include-before$
@@ -190,24 +270,26 @@ $if(toc)$
 }
 $endif$
 
+% letter {
 $if(letter)$
   \begin{letter}{$for(address)$$address$ \\$endfor$}
-
   $if(opening)$
   \opening{$opening$}
   $endif$
 $endif$
+% }
 
 $body$
 
+% letter {
 $if(letter)$
   $if(closing)$
-    % Move signature and close to the left
-    \longindentation=0pt
+    \longindentation=0pt % Move signature and close to the left
     \closing{$closing$}
   $endif$
   \end{letter}
 $endif$
+% }
 
 $if(natbib)$
 $if(biblio-files)$
@@ -230,4 +312,9 @@ $for(include-after)$
 $include-after$
 
 $endfor$
+% a0poster {
+$if(a0poster)$
+\end{multicols}
+$endif$
+% }
 \end{document}
