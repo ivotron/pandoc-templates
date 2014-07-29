@@ -125,6 +125,9 @@ $if(lang)$
   \usepackage[$lang$]{babel}
 \fi
 $endif$
+$if(hidepagenumbers)$
+
+$endif$
 
 % a0poster {
 $if(a0poster)$
@@ -192,10 +195,10 @@ $endif$
 $for(author)$
   $if(author.name)$
     $if(acm-sig-alternate)$
-      \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(author.email)$ \email{$author.email$} $endif$
+      \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \email{$author.email$} $endif$ $endif$
     $else$
       $if(ieeetran)$
-        \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(author.email)$ \\ $author.email$ $endif$ }
+        \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ ($author.affiliation$) $endif$ $if(hideemail)$ $else$ $if(author.email)$ \\ $author.email$ $endif$ $endif$ \\ }
       $else$
         $author.name$ $if(author.affiliation)$ ($author.affiliation$) $endif$
       $endif$

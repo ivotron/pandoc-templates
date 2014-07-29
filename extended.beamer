@@ -137,6 +137,8 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+\setbeamerfont{footnote}{size=\tiny}
+
 $if(title)$
 \title{$title$}
 $endif$
