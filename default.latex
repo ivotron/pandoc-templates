@@ -125,9 +125,6 @@ $if(lang)$
   \usepackage[$lang$]{babel}
 \fi
 $endif$
-$if(hidepagenumbers)$
-
-$endif$
 
 % a0poster {
 $if(a0poster)$
@@ -242,6 +239,10 @@ $endif$
 
 $if(title)$
 \maketitle
+$if(no-page-number-on-titlepage)$
+\thispagestyle{empty}
+\setcounter{page}{0}
+$endif$
 $endif$
 
 % a0poster {
@@ -256,6 +257,9 @@ $if(abstract)$
 \begin{abstract}
 $abstract$
 \end{abstract}
+$if(abstract-break)$
+\newpage
+$endif$
 $endif$
 
 % a0poster {
@@ -274,6 +278,9 @@ $if(toc)$
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
+$if(toc-break)$
+\newpage
+$endif$
 }
 $endif$
 
