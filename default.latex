@@ -170,6 +170,11 @@ $if(a0poster)$
 $endif$
 % }
 
+$if(section-break)$
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+$endif$
+
 $if(nofootnoterule)$
 \renewcommand*\footnoterule{}
 $endif$
