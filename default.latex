@@ -195,7 +195,14 @@ $endif$
 
 % title {
 $if(title)$
+  $if(no-subtitle-command)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
+  $else$
+\title{$title$}
+    $if(subtitle)$
+\subtitle{$subtitle$}
+    $endif$
+  $endif$
 $endif$
 % }
 
