@@ -73,8 +73,6 @@ $if(verbatim-in-note)$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
-\renewcommand{\longtable}{\tabular}
-\renewcommand{\endlongtable}{\endtabular}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
