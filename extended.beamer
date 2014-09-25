@@ -133,6 +133,11 @@ $endif$
 $if(lang)$
 \usepackage[$lang$]{babel}
 $endif$
+
+$if(nofigurecaption)$
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+$endif$
+
 $for(header-includes)$
 $header-includes$
 $endfor$
