@@ -69,11 +69,7 @@ $if(verbatim-in-note)$
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}$if(monofontsize)$,fontsize=\$monofontsize$$endif$}
 $endif$
 $if(tables)$
-\usepackage{longtable}
-% These lines are needed to make table captions work with longtable:
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
+\usepackage{longtable,booktabs}
 $endif$
 $if(url)$
 \usepackage{url}
