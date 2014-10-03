@@ -95,6 +95,8 @@ $endif$
 
 \newcommand{\columnsbegin}{\begin{columns}}
 \newcommand{\columnsend}{\end{columns}}
+\newcommand{\tinybegin}{\begin{scriptsize}}
+\newcommand{\tinyend}{\end{scriptsize}}
 
 % Comment these out if you don't want a slide with just the
 % part/section/subsection/subsubsection title:
