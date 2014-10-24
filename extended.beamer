@@ -1,3 +1,5 @@
+% -*- mode: tex -*-
+% # vi: set ft=tex :
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 $if(theme)$
 \usetheme{$theme$}
