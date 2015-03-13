@@ -4,6 +4,9 @@ $if(fontfamily)$
 $else$
 \usepackage{lmodern}
 $endif$
+$if(usenix)$
+\usepackage{usenix}
+$endif$
 $if(linestretch)$
 \usepackage{setspace}
 \setstretch{$linestretch$}
@@ -217,16 +220,21 @@ $endif$
 $for(author)$
   $if(author.name)$
     $if(acm-sig-alternate)$
-      \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \email{$author.email$} $endif$ $endif$
+\alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \email{$author.email$} $endif$ $endif$
     $else$
       $if(ieeetran)$
-        \IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \\ $author.email$ $endif$ $endif$ \\ }
+\IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ ($author.affiliation$) $endif$ $if(hideemail)$ $else$ $if(author.email)$ \\ $author.email$ $endif$ $endif$ \\ }
       $else$
-        $author.name$ $if(author.affiliation)$ ($author.affiliation$) $endif$
+        $if(usenix)$
+{\rm $author.name$}\\
+$if(author.affiliation)$ $author.affiliation$ $endif$
+        $else$
+$author.name$ $if(author.affiliation)$ ($author.affiliation$) $endif$
+        $endif$
       $endif$
     $endif$
   $else$
-    $author$
+$author$
   $endif$
   $sep$ \and
 $endfor$
