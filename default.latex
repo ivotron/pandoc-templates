@@ -212,6 +212,9 @@ $if(acm-sig-alternate)$
 $endif$
 
 % authors {
+$if(sigplanconf)$
+$for(author)$ \authorinfo{$author.name$}{$author.affiliation$}{$author.email$} $endfor$
+$else$
 $if(letter)$
 \signature{
 $else$
@@ -239,6 +242,7 @@ $author$
   $sep$ \and
 $endfor$
 }
+$endif$
 % }
 
 \date{$date$}
@@ -288,6 +292,12 @@ $abstract$
 \end{abstract}
 $if(abstract-break)$
 \newpage
+$endif$
+$endif$
+
+$if(keywords)$
+$if(sigplanconf)$
+\keywords $for(keywords)$ $keywords$$sep$,$endfor$
 $endif$
 $endif$
 
