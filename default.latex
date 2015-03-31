@@ -295,6 +295,12 @@ $if(abstract-break)$
 $endif$
 $endif$
 
+$if(terms)$
+$if(sigplanconf)$
+\terms $for(terms)$ $terms$$sep$,$endfor$
+$endif$
+$endif$
+
 $if(keywords)$
 $if(sigplanconf)$
 \keywords $for(keywords)$ $keywords$$sep$,$endfor$
