@@ -106,7 +106,7 @@ $endif$
             pdfborder={0 0 0}}
 \urlstyle{same}  % don't use monospace font for urls
 $if(substitute-hyperref)$
-\renewcommand*{\hyperref}[2][\ar]{\def\ar{#2}#2 (\autoref{#1})}
+\renewcommand*{\hyperref}[2][\ar]{\def\ar{#2}#2\autoref{#1}}
 $endif$
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
