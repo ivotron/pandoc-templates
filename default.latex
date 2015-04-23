@@ -304,6 +304,14 @@ $if(abstract-break)$
 $endif$
 $endif$
 
+$if(categories)$
+$if(sigplanconf)$
+$for(categories)$
+\category{$categories.category$}{$categories.subcategory$}{$categories.third$}
+$endfor$
+$endif$
+$endif$
+
 $if(terms)$
 $if(sigplanconf)$
 \terms $for(terms)$ $terms$$sep$,$endfor$
