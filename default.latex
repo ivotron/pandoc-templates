@@ -174,50 +174,6 @@ $if(lang)$
 \fi
 $endif$
 
-% a0poster {
-$if(a0poster)$
-
-  % multicol stuff
-  \usepackage{multicol} % so we can have multiple columns of text side-by-side
-  $if(columnsep)$
-    \columnsep=$columnsep$ % the amount of white space between columns
-  $endif$
-  $if(columnseprule)$ % the thickness of the black line between columns
-    \columnseprule=$columnseprule$
-  $endif$
-
-  % title format
-  \makeatletter
-  \renewcommand\@maketitle{%
-  \begin{center}
-  \null
-  {
-  \VERYHuge
-  $if(titlecolor)$
-  \color{$titlecolor$}
-  $endif$
-  \textbf{\@title} \par}%
-  \vskip 0.6em%
-  {
-  \Huge
-  \lineskip .5em%
-  \begin{tabular}[t]{l}%
-  \@author
-  \end{tabular}\par}%
-  \vskip 1cm
-  \par
-  \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
-  \end{center}
-  }
-  \makeatother
-
-  \pagenumbering{gobble} % remove page numbers
-
-  \usepackage{titlesec}
-  \titleformat*{\section}{\veryHuge\bfseries}
-$endif$
-% }
-
 $if(section-break)$
 \let\stdsection\section
 \renewcommand\section{\newpage\stdsection}
@@ -297,12 +253,6 @@ $endif$
 
 \begin{document}
 
-% a0poster {
-$if(a0poster)$
-  \begin{minipage}{\textwidth}
-$endif$
-% }
-
 $if(title)$
 \maketitle
 $if(no-page-number-on-titlepage)$
@@ -310,14 +260,6 @@ $if(no-page-number-on-titlepage)$
 \setcounter{page}{0}
 $endif$
 $endif$
-
-% a0poster {
-$if(a0poster)$
-  \end{minipage}
-  \vspace{1cm}
-  \LARGE
-$endif$
-% }
 
 $if(abstract)$
 \begin{abstract}
@@ -347,13 +289,6 @@ $if(sigplanconf)$
 \keywords $for(keywords)$ $keywords$$sep$,$endfor$
 $endif$
 $endif$
-
-% a0poster {
-$if(a0poster)$
-  \begin{multicols}{$if(columns)$ $columns$ $else$ 4 $endif$}
-  \raggedcolumns
-$endif$
-% }
 
 $for(include-before)$
 $include-before$
@@ -419,9 +354,4 @@ $for(include-after)$
 $include-after$
 
 $endfor$
-% a0poster {
-$if(a0poster)$
-\end{multicols}
-$endif$
-% }
 \end{document}
