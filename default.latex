@@ -280,12 +280,10 @@ $if(no-page-number-on-titlepage)$
 $endif$
 $endif$
 
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
-$if(abstract-break)$
-\newpage
+$if(thesis)$
+$if(disable-copyright)$
+$else$
+\copyrightpage
 $endif$
 $endif$
 
@@ -338,6 +336,15 @@ $if(lot)$
 $endif$
 $if(lof)$
 \listoffigures
+$endif$
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$if(abstract-break)$
+\newpage
+$endif$
 $endif$
 
 $if(thesis)$
