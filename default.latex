@@ -348,12 +348,12 @@ $endif$
 $endif$
 
 $if(thesis)$
-\begin{acknowledgements}
-$acknowledgements$
-\end{acknowledgements}
 \begin{dedication}
 $dedication$
 \end{dedication}
+\begin{acknowledgements}
+$acknowledgements$
+\end{acknowledgements}
 \end{frontmatter}
 $endif$
 
