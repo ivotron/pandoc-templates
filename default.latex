@@ -136,6 +136,7 @@ $endif$
 \urlstyle{same}  % don't use monospace font for urls
 $if(substitute-hyperref)$
 \renewcommand*{\hyperref}[2][\ar]{\def\ar{#2}#2\autoref{#1}}
+\renewcommand*{\chapterautorefname}{Chapter}
 \renewcommand*{\figureautorefname}{Figure}
 \renewcommand*{\sectionautorefname}{Section}
 \renewcommand*{\subsectionautorefname}{Section}
