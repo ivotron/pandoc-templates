@@ -253,6 +253,25 @@ $endif$
 
 \begin{document}
 
+$if(thesis)$
+\degreeyear{$year$}
+\degreemonth{$month$}
+\degree{$degree$}
+\numberofmembers{$numberofmembers$} %% (including chair) possible: 3, 4, 5, 6
+\chair{$chair$}
+\committeememberone{$memberone$}
+\committeemembertwo{$membertwo$}
+\committeememberthree{$memberthree$}
+\deanlineone{$deanname$}
+\deanlinetwo{$deantitle$}
+\deanlinethree{}
+\field{$field$}
+\campus{$campus$}
+
+\begin{frontmatter}
+
+$endif$
+
 $if(title)$
 \maketitle
 $if(no-page-number-on-titlepage)$
@@ -319,6 +338,16 @@ $if(lot)$
 $endif$
 $if(lof)$
 \listoffigures
+$endif$
+
+$if(thesis)$
+\begin{acknowledgements}
+$acknowledgements$
+\end{acknowledgements}
+\begin{dedication}
+$dedication$
+\end{dedication}
+\end{frontmatter}
 $endif$
 
 $body$
