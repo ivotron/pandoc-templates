@@ -243,7 +243,7 @@ $if(numberofauthors)$
 $else$
 \numberofauthors{3}
 $endif$
-endif$
+$endif$
 % }
 
 % authors {
