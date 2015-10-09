@@ -104,10 +104,11 @@ $endif$
 
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
-\VerbatimFootnotes
+\VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
+% tables {
 $if(tables)$
-\usepackage{longtable,booktabs}
+\usepackage{longtable}
 $if(twocolumn-longtable)$
 \makeatletter
 \let\oldlt\longtable
@@ -133,6 +134,12 @@ $endif$
 \makeatother
 $endif$
 $endif$
+% we might add tables as raw-latex, so we need this to
+% be used regardless of whether there are tables
+% inserted in markdown syntax
+\usepackage{booktabs}
+% }
+
 $if(graphics)$
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -178,6 +185,8 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
+
+% spacing {
 $if(usedefaultspacing)$
 % no spacing just use whatever has been defined somewhere else
 $else$
@@ -185,16 +194,25 @@ $else$
 \setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 $endif$
+% }
+
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% section numbering {
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
 \setcounter{secnumdepth}{0}
 $endif$
-$if(verbatim-in-note)$
-\VerbatimFootnotes % allows verbatim text in footnotes
+% }
+
+% page size {
+$if(acm-sig-alternate)$
+\pdfpagewidth=8.5in
+\pdfpageheight=11in
 $endif$
+% }
 
 $if(section-break)$
 \let\stdsection\section
@@ -218,9 +236,15 @@ $if(title)$
 $endif$
 % }
 
+% numberofauthors {
 $if(acm-sig-alternate)$
+$if(numberofauthors)$
+\numberofauthors{$numberofauthors$}
+$else$
 \numberofauthors{3}
 $endif$
+endif$
+% }
 
 % authors {
 $if(sigplanconf)$
@@ -261,15 +285,9 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
-$if(disable-copyright)$
-\makeatletter
-\def\@copyrightspace{\relax}
-\makeatother
-$endif$
-
 % letter {
 $if(letter)$
-  \address{$for(return-address)$$return-address$ \\$endfor$}
+\address{$for(return-address)$$return-address$ \\$endfor$}
 $endif$
 % }
 % Redefines (sub)paragraphs to behave more like sections
@@ -284,6 +302,25 @@ $endif$
 
 \begin{document}
 
+% copyright conference {
+$if(acm-sig-alternate)$
+\global\copyrightetc{Copyright \the\copyrtyr\ ACM \the\acmcopyr}
+\conferenceinfo{$conferencename$}{$conferenceinfo$}
+\CopyrightYear{$copyrightyear$}
+\crdata{$isbn$\ ...\$$15.00.\\
+$if(doi)$DOI: http://dx.doi.org/$doi$ $endif$}
+$endif$
+
+$if(ieeetran)$
+$if(disable-copyright)$
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+$endif$
+$endif$
+% }
+
+% thesis front matter {
 $if(thesis)$
 \degreeyear{$year$}
 \degreemonth{$month$}
@@ -298,10 +335,9 @@ $if(thesis)$
 \deanlinethree{}
 \field{$field$}
 \campus{$campus$}
-
 \begin{frontmatter}
-
 $endif$
+% }
 
 $if(title)$
 \maketitle
@@ -311,12 +347,14 @@ $if(no-page-number-on-titlepage)$
 $endif$
 $endif$
 
+% copyright thesis {
 $if(thesis)$
 $if(disable-copyright)$
 $else$
 \copyrightpage
 $endif$
 $endif$
+% }
 
 $if(categories)$
 $if(sigplanconf)$
@@ -355,10 +393,10 @@ $endif$
 
 % letter {
 $if(letter)$
-  \begin{letter}{$for(address)$$address$ \\$endfor$}
-  $if(opening)$
-  \opening{$opening$}
-  $endif$
+\begin{letter}{$for(address)$$address$ \\$endfor$}
+$if(opening)$
+\opening{$opening$}
+$endif$
 $endif$
 % }
 
@@ -392,11 +430,11 @@ $body$
 
 % letter {
 $if(letter)$
-  $if(closing)$
-    \longindentation=0pt % Move signature and close to the left
-    \closing{$closing$}
-  $endif$
-  \end{letter}
+$if(closing)$
+\longindentation=0pt % Move signature and close to the left
+\closing{$closing$}
+$endif$
+\end{letter}
 $endif$
 % }
 
