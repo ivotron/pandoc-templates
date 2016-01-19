@@ -99,7 +99,7 @@ $highlighting-macros$
 $endif$
 
 $if(monofont-size)$
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\$monofont-size$}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=$monofont-size$}
 $endif$
 
 $if(verbatim-in-note)$
@@ -117,7 +117,7 @@ $if(twocolumn-longtable)$
 \def\longtable@i[#1]{\begin{figure}[htbp]
 \onecolumn
 $if(table-font-size)$
-\$table-font-size$
+$table-font-size$
 $endif$
 \begin{minipage}{0.5\textwidth}
 \oldlt[#1]
