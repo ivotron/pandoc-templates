@@ -260,7 +260,7 @@ $for(author)$
 \alignauthor $author.name$ \\ $if(author.affiliation)$ \affaddr{$author.affiliation$} \\ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \email{$author.email$} $endif$ $endif$
     $else$
       $if(ieeetran)$
-\IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ ($author.affiliation$) $endif$ $if(hideemail)$ $else$ $if(author.email)$ \\ $author.email$ $endif$ $endif$ \\ }
+\IEEEauthorblockN{$author.name$} \IEEEauthorblockA{ $if(author.affiliation)$ $author.affiliation$ $endif$ $if(hideemail)$ $else$ $if(author.email)$ \\ $author.email$ $endif$ $endif$ \\ }
       $else$
         $if(usenix)$
 {\rm $author.name$}\\
